@@ -1,0 +1,16 @@
+<!-- The Modal -->
+<div id="{{id}}" class="w3-modal" style="display: {{display}};">
+  <div class="w3-modal-content w3-card-4 w3-animate-top">
+    <header class="w3-container w3-{{color}} w3-display-container">
+      <span onclick="document.getElementById('{{id}}').style.display='none'" class="w3-button w3-teal w3-display-topright">&times;</i></span>
+      {{title}}
+    </header>
+    <div class="w3-container w3-padding-64">
+      {{body}}
+    </div>
+    <footer class="w3-container w3-{{color}} w3-padding-32">
+      {{footer}}
+    </footer>
+  </div>
+</div>
+
