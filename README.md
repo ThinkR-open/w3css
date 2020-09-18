@@ -7,7 +7,8 @@ w3css
 <!-- badges: start -->
 <!-- badges: end -->
 
-\[WORK IN PROGRESS\]
+\[WORK IN PROGRESS\] There are still a lot of elements/features to
+implement.
 
 An implementation of W3 CSS
 <a href="https://www.w3schools.com/w3css/" class="uri">https://www.w3schools.com/w3css/</a>
@@ -18,9 +19,31 @@ Installation
 
     remotes::install_github("thinkr-open/w3css")
 
+Note about W3.CSS approach
+--------------------------
+
+W3.CSS philosophy is to allow a lot of flexibily in your UI design by
+setting CSS class to your component. For example, to create a container
+with a padding and centered, you’d do:
+
+    <div class="w3-container w3-center w3-padding-24">
+      <p> My content </p>
+    </div>
+
+Which will be translated here with:
+
+    w3_container(
+      class = w3_center(),
+      class = w3_padding(24), 
+      htmltools::tags$p(
+        "My content"
+      )
+    )
+
 Example
 -------
 
+    library(w3css)
     library(shiny)
     ui <- function(){
       w3_page(
