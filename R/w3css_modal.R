@@ -39,11 +39,11 @@ w3_modal <- function(
 #' @rdname modals
 #' @export
 w3_show_modal <- function(inputId, session = shiny::getDefaultReactiveDomain()){
-  session$sendCustomMessage("show_modal", message)
+  session$sendCustomMessage("show_modal", inputId)
 }
 
 #' @rdname modals
 #' @export
 w3_hide_modal <- function(inputId, session = shiny::getDefaultReactiveDomain()){
-  session$sendCustomMessage("hide_modal", message)
+  session$sendCustomMessage("hide_modal", inputId)
 }
