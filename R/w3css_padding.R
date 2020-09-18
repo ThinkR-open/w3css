@@ -23,6 +23,7 @@ w3_padding <- function(
     "large"
   )
 ){
+  value <- as.character(value)
   value <- match.arg(value)
   if (value == ""){
     return(
