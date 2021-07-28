@@ -1,6 +1,9 @@
 $(document).on("click", ".w3button", function(evt) {
-  debugger;
-  var el = $(evt.target);
+  var el = evt.target;
+  while (el.nodeName != "BUTTON"){
+    el = el.parentNode;
+  }
+  el = $(el);
   el.val( parseInt(el.val()) + 1)
   el.trigger("updated");
 });

@@ -1,6 +1,6 @@
 Package: w3css
 Title: W3CSS for 'shiny'
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: 
     person(given = "Colin",
            family = "Fay",
