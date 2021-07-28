@@ -28,9 +28,9 @@ w3_editableListInput(inputId, label, choices, ul_class = "", li_class = "")
 
 \item{choices}{List of values to select from (if elements of the list are
 named then that name rather than the value is displayed to the user). If
-this argument is provided, then \code{choiceNames} and \code{choiceValues}
-must not be provided, and vice-versa. The values should be strings; other
-types (such as logicals and numbers) will be coerced to strings.}
+this argument is provided, then \code{choiceNames} and \code{choiceValues} must not
+be provided, and vice-versa. The values should be strings; other types
+(such as logicals and numbers) will be coerced to strings.}
 
 \item{placeholder}{A character string giving the user a hint as to what can
 be entered into the control. Internet Explorer 8 and 9 do not support this
