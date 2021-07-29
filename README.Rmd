@@ -63,6 +63,14 @@ ui <- function(){
         w3_actionButton(
           "w3_actionButton", 
           "Show Modal"
+        ), 
+        w3_numericInput(
+          "w3_numericInput", 
+          "Enter number", 
+          value = 5, 
+          min = 1, 
+          max = 10, 
+          step = 2
         )
       ),
       w3_panel(
@@ -127,6 +135,9 @@ server <- function(
     print(input$w3_actionButton)
     req(input$w3_actionButton > 0)
     w3_show_modal("w3_modal")
+  })
+  observeEvent( input$w3_numericInput , {
+    print(input$w3_numericInput)
   })
   observeEvent( input$w3_radioButton , {
     print(input$w3_radioButton)

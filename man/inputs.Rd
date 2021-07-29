@@ -7,6 +7,7 @@
 \alias{w3_passwordInput}
 \alias{w3_dateInput}
 \alias{w3_editableListInput}
+\alias{w3_numericInput}
 \title{W3.CSS Input}
 \usage{
 w3_radioButton(inputId, label, choices)
@@ -20,6 +21,16 @@ w3_passwordInput(inputId, label, placeholder = "")
 w3_dateInput(inputId, label, value = Sys.Date(), min = "", max = "")
 
 w3_editableListInput(inputId, label, choices, ul_class = "", li_class = "")
+
+w3_numericInput(
+  inputId,
+  label,
+  value = NULL,
+  min,
+  max,
+  step = NULL,
+  placeholder = ""
+)
 }
 \arguments{
 \item{inputId}{The \code{input} slot that will be used to access the value.}
