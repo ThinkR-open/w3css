@@ -212,3 +212,31 @@ w3_editableListInput <- function(
   )
 
 }
+
+#' @export
+#' @rdname inputs
+w3_numericInput<- function(
+  inputId,
+  label,
+  value = NULL,
+  min,
+  max,
+  step = NULL,
+  placeholder = ""
+) {
+
+    tagList(
+      tags$label(
+        label
+      ),
+      tags$input(
+        id = inputId,
+        class = "w3-input w3_numericInput w3-border",
+        type = "number",
+        value = value,
+        min = min,
+        max = max,
+        step = step
+      )
+    )
+}
