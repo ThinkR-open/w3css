@@ -58,7 +58,6 @@ w3_radioButton <- function(
     tags$form(
       class="w3-radio-parent",
       id = inputId,
-      class="w3-container w3-card-4",
       tags$label(
         label
       ),
@@ -93,7 +92,24 @@ w3_selectInput <- function(
       }, x = choices, y = names(choices), SIMPLIFY = FALSE)
     )
   )
+}
 
+#' @export
+#' @rdname inputs
+w3_updateSelectInput <- function(
+  inputId,
+  label = NULL,
+  choices = NULL,
+  session = shiny::getDefaultReactiveDomain()
+
+){
+  message <- dropNulls(
+    list(
+      label = label,
+      choices = choices
+    )
+  )
+  session$sendInputMessage(inputId, message)
 }
 
 #' @importFrom htmltools tagList
@@ -239,4 +255,109 @@ w3_numericInput<- function(
         step = step
       )
     )
+}
+
+# FROM shiny codebase
+
+dropNulls <- function (x){
+  x[!vapply(x, is.null, FUN.VALUE = logical(1))]
+}
+
+#' @export
+#' @rdname inputs
+w3_updateNumericInput <- function(
+  inputId,
+  label = NULL,
+  placeholder = NULL,
+  value = NULL,
+  min = NULL,
+  max = NULL,
+  step = NULL,
+  session = shiny::getDefaultReactiveDomain()
+
+){
+  message <- dropNulls(
+    list(
+      label = label,
+      placeholder = placeholder,
+      value = value,
+      min = min,
+      max = max,
+      step = step
+    )
+  )
+  session$sendInputMessage(inputId, message)
+}
+
+#' @export
+#' @rdname inputs
+w3_checkbox <- function(
+  inputId,
+  label,
+  value = FALSE
+) {
+  if (!value){
+    value <- NULL
+  }
+  tags$div(
+    tags$input(
+      id = inputId,
+      class = "w3-check w3_checkbox",
+      type = "checkbox",
+      checked = value,
+      name = label
+    ),
+    tags$label(
+      `for` = label,
+      label
+    )
+  )
+
+}
+
+#' @export
+#' @rdname inputs
+w3_checkboxGroupInput <- function(
+  inputId,
+  label = NULL,
+  choices,
+  selected = NULL,
+  choiceNames = NULL
+) {
+
+  if (is.null(choiceNames)){
+    choiceNames <- choices
+  }
+  if (is.null(selected)){
+    selected <- NA
+  }
+
+  tagList(
+    tags$label(label),
+    tags$div(
+      id = inputId,
+      class = "w3_checkboxGroup-parent",
+      mapply(function(choice, choiceName, selected){
+
+        tags$div(
+          tags$input(
+            class = "w3-check w3_checkboxGroupInput",
+            type = "checkbox",
+            checked = {
+              if (choice %in% selected){
+                "checked"
+              } else {
+                NULL
+              }
+            },
+            name = inputId,
+            value = choiceName
+          ),
+          tags$label(
+            choiceName
+          )
+        )
+      }, choices, choiceNames, selected, SIMPLIFY = FALSE)
+    )
+  )
 }

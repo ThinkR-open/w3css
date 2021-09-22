@@ -3,16 +3,27 @@
 \name{w3_radioButton}
 \alias{w3_radioButton}
 \alias{w3_selectInput}
+\alias{w3_updateSelectInput}
 \alias{w3_textInput}
 \alias{w3_passwordInput}
 \alias{w3_dateInput}
 \alias{w3_editableListInput}
 \alias{w3_numericInput}
+\alias{w3_updateNumericInput}
+\alias{w3_checkbox}
+\alias{w3_checkboxGroupInput}
 \title{W3.CSS Input}
 \usage{
 w3_radioButton(inputId, label, choices)
 
 w3_selectInput(inputId, label, choices)
+
+w3_updateSelectInput(
+  inputId,
+  label = NULL,
+  choices = NULL,
+  session = shiny::getDefaultReactiveDomain()
+)
 
 w3_textInput(inputId, label, placeholder = "")
 
@@ -30,6 +41,27 @@ w3_numericInput(
   max,
   step = NULL,
   placeholder = ""
+)
+
+w3_updateNumericInput(
+  inputId,
+  label = NULL,
+  placeholder = NULL,
+  value = NULL,
+  min = NULL,
+  max = NULL,
+  step = NULL,
+  session = shiny::getDefaultReactiveDomain()
+)
+
+w3_checkbox(inputId, label, value = FALSE)
+
+w3_checkboxGroupInput(
+  inputId,
+  label = NULL,
+  choices,
+  selected = NULL,
+  choiceNames = NULL
 )
 }
 \arguments{
@@ -56,6 +88,19 @@ option.}
 \code{yyyy-mm-dd} format.}
 
 \item{ul_class, li_class}{CSS class for the internal elements.}
+
+\item{selected}{The initially selected value. If not specified, then it
+defaults to the first item in \code{choices}. To start with no items selected,
+use \code{character(0)}.}
+
+\item{choiceNames}{List of names and values, respectively, that
+are displayed to the user in the app and correspond to the each choice (for
+this reason, \code{choiceNames} and \code{choiceValues} must have the same length).
+If either of these arguments is provided, then the other \emph{must} be provided
+and \code{choices} \emph{must not} be provided. The advantage of using both of these
+over a named list for \code{choices} is that \code{choiceNames} allows any type of UI
+object to be passed through (tag objects, icons, HTML code, ...), instead
+of just simple text. See Examples.}
 }
 \value{
 Input UI elements

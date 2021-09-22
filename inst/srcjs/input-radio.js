@@ -9,8 +9,6 @@ $(document).on("click", ".w3-radio", function(evt) {
 });
 
 $(document).on("click", ".w3-radio-parent", function(evt) {
-  console.log("après");
-    debugger;
   var el = $(evt.target);
   el.trigger("change");
 });

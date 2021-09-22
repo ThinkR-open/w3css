@@ -16,19 +16,38 @@ $.extend(numericInput, {
   },
 
   receiveMessage: function(el, data) {
-    console.log("receiveMessage")
-    // this.setValue(el, data);
+     if (data.label){
+      $(`label[for="${$(el).attr("id")}"]`).text(data.label);
+    }
+
+    if (data.placeholder){
+      $(el).attr("placeholder", data.placeholder)
+    }
+
+    if (data.value){
+      $(el).val(data.value)
+    }
+
+    if (data.min){
+      $(el).attr("min", data.min)
+    }
+
+    if (data.max){
+      $(el).attr("max", data.max)
+    }
+
+    if (data.step){
+      $(el).attr("step", data.step)
+    }
   },
 
   subscribe: function(el, callback) {
     $(el).on('keyup.numericInput', function(e) {
-      console.log("change.numericInput")
       callback();
     });
   },
 
   unsubscribe: function(el) {
-    console.log("unsubscribe")
     $(el).off('.numericInput');
   }
 

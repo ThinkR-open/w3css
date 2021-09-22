@@ -35,7 +35,7 @@ For example, to create a container with a padding and centered, you'd do:
 
 ```html
 <div class="w3-container w3-center w3-padding-24">
-  <p> My content </p>
+<p> My content </p>
 </div>
 ```
 
@@ -63,14 +63,6 @@ ui <- function(){
         w3_actionButton(
           "w3_actionButton", 
           "Show Modal"
-        ), 
-        w3_numericInput(
-          "w3_numericInput", 
-          "Enter number", 
-          value = 5, 
-          min = 1, 
-          max = 10, 
-          step = 2
         )
       ),
       w3_panel(
@@ -83,6 +75,25 @@ ui <- function(){
         ) 
       )
       ,
+      w3_panel(
+        w3_numericInput(
+          "w3_numericInput", 
+          "Enter number", 
+          value = 5, 
+          min = 1, 
+          max = 10, 
+          step = 2
+        ),
+        w3_checkbox(
+          "w3_checkbox", 
+          "Click me"
+        ),
+        w3_checkboxGroupInput(
+          "w3_checkboxGroupInput", 
+          "Checkbox group", 
+          choices = letters[1:4]
+        )
+      ),
       w3_panel(
         w3_radioButton(
           "w3_radioButton", 
@@ -139,6 +150,12 @@ server <- function(
   observeEvent( input$w3_numericInput , {
     print(input$w3_numericInput)
   })
+  observeEvent( input$w3_checkbox , {
+    print(input$w3_checkbox)
+  })
+  observeEvent( input$w3_checkboxGroupInput , {
+    print(input$w3_checkboxGroupInput)
+  })
   observeEvent( input$w3_radioButton , {
     print(input$w3_radioButton)
   })
@@ -157,6 +174,46 @@ server <- function(
   observeEvent( input$w3_editableListInput , {
     print(input$w3_editableListInput)
   })
+  
+}
+
+shinyApp(ui, server)
+```
+
+```{r}
+library(shiny)
+ui <- function(request){
+  w3_page(
+    w3_actionButton(
+      "w3_actionButton", 
+      "Update"
+    ),
+    w3_numericInput(
+      "w3_numericInput", 
+      "Enter number", 
+      value = 5, 
+      min = 1, 
+      max = 10, 
+      step = 2
+    )
+  )
+}
+
+server <- function(
+  input, 
+  output, 
+  session
+){
+  observeEvent( input$w3_actionButton , {
+    w3_updateNumericInput(
+      "w3_numericInput",
+      "Enter number", 
+      value = 15, 
+      min = 5, 
+      max = 55, 
+      step = 3
+    )
+  }, ignoreInit = TRUE)
   
 }
 
