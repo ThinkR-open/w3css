@@ -31,12 +31,9 @@ input_binding <- function() {
   htmlDependency(
     "w3js","0.1.0",
     src = system.file("srcjs", package = "w3css"),
-    script = c(
-      "input-button.js",
-      "input-radio.js",
-      "input-text.js",
-      "input-editablelist.js",
-      "input-date.js"
+    script = list.files(
+      pattern = "input-",
+      system.file("srcjs", package = "w3css")
     )
   )
 }
