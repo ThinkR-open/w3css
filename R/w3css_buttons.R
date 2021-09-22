@@ -24,7 +24,7 @@ w3_actionButton <- function(
   tagList(
     tags$button(
       id = inputId,
-      class = sprintf("w3button w3-%s", type),
+      class = sprintf("w3button w3-%s w3-border", type),
       value = 0,
       label,
       # disabled,
