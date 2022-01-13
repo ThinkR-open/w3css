@@ -16,7 +16,7 @@
 \usage{
 w3_radioButton(inputId, label, choices)
 
-w3_selectInput(inputId, label, choices)
+w3_selectInput(inputId, label, choices, selected = NULL)
 
 w3_updateSelectInput(
   inputId,
@@ -75,6 +75,10 @@ this argument is provided, then \code{choiceNames} and \code{choiceValues} must 
 be provided, and vice-versa. The values should be strings; other types
 (such as logicals and numbers) will be coerced to strings.}
 
+\item{selected}{The initially selected value. If not specified, then it
+defaults to the first item in \code{choices}. To start with no items selected,
+use \code{character(0)}.}
+
 \item{placeholder}{A character string giving the user a hint as to what can
 be entered into the control. Internet Explorer 8 and 9 do not support this
 option.}
@@ -88,10 +92,6 @@ option.}
 \code{yyyy-mm-dd} format.}
 
 \item{ul_class, li_class}{CSS class for the internal elements.}
-
-\item{selected}{The initially selected value. If not specified, then it
-defaults to the first item in \code{choices}. To start with no items selected,
-use \code{character(0)}.}
 
 \item{choiceNames}{List of names and values, respectively, that
 are displayed to the user in the app and correspond to the each choice (for
@@ -112,8 +112,7 @@ Implementation of W3.CSS Input, as described in
 \examples{
 
 w3_actionButton(
-"w3_actionButton",
-"Show Modal"
+  "w3_actionButton",
+  "Show Modal"
 )
-
 }

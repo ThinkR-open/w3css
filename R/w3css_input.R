@@ -20,32 +20,27 @@
 #' @examples
 #'
 #' w3_actionButton(
-#' "w3_actionButton",
-#' "Show Modal"
+#'   "w3_actionButton",
+#'   "Show Modal"
 #' )
-#'
-
-w3_radioButton <- function(
-  inputId,
-  label,
-  choices
-) {
-
-  if(is.null(names(choices))){
+w3_radioButton <- function(inputId,
+                           label,
+                           choices) {
+  if (is.null(names(choices))) {
     names(choices) <- choices
   }
 
-  them <- mapply(function(x, y){
+  them <- mapply(function(x, y) {
     checked <- NULL
-    if (x == choices[1]){
+    if (x == choices[1]) {
       checked <- "true"
     }
     tags$p(
       tags$input(
-        class="w3-radio",
-        type="radio",
+        class = "w3-radio",
+        type = "radio",
         name = inputId,
-        `data-value`= x,
+        `data-value` = x,
         checked = checked
       ),
       tags$label(
@@ -56,7 +51,7 @@ w3_radioButton <- function(
 
   tagList(
     tags$form(
-      class="w3-radio-parent",
+      class = "w3-radio-parent",
       id = inputId,
       tags$label(
         label
@@ -69,24 +64,34 @@ w3_radioButton <- function(
 #' @export
 #' @rdname inputs
 
-w3_selectInput <- function(
-  inputId,
-  label,
-  choices # TODO preselect
-){
-  if(is.null(names(choices))){
+w3_selectInput <- function(inputId,
+                           label,
+                           choices,
+                           selected = NULL) {
+  if (is.null(selected)) {
+    selected <- choices[1]
+  }
+  if (is.null(names(choices))) {
     names(choices) <- choices
   }
+
   tags$div(
     class = "w3-select-parent",
     tags$label(label),
     tags$select(
       id = inputId,
       class = "w3-select",
-      name   = inputId,
-      mapply(function(x, y){
+      name = inputId,
+      mapply(function(x, y) {
         tags$option(
           value = x,
+          selected = {
+            if (x == selected) {
+              "selected"
+            } else {
+              NULL
+            }
+          },
           y
         )
       }, x = choices, y = names(choices), SIMPLIFY = FALSE)
@@ -96,13 +101,10 @@ w3_selectInput <- function(
 
 #' @export
 #' @rdname inputs
-w3_updateSelectInput <- function(
-  inputId,
-  label = NULL,
-  choices = NULL,
-  session = shiny::getDefaultReactiveDomain()
-
-){
+w3_updateSelectInput <- function(inputId,
+                                 label = NULL,
+                                 choices = NULL,
+                                 session = shiny::getDefaultReactiveDomain()) {
   message <- dropNulls(
     list(
       label = label,
@@ -113,13 +115,10 @@ w3_updateSelectInput <- function(
 }
 
 #' @importFrom htmltools tagList
-w3_text <- function(
-  inputId,
-  label,
-  placeholder = "",
-  type
-){
-
+w3_text <- function(inputId,
+                    label,
+                    placeholder = "",
+                    type) {
   tagList(
     tagList(
       tags$label(
@@ -127,8 +126,8 @@ w3_text <- function(
       ),
       tags$input(
         id = inputId,
-        class="w3-input w3_textInput w3-border ",
-        type=type,
+        class = "w3-input w3_textInput w3-border ",
+        type = type,
         placeholder = placeholder
       )
     )
@@ -137,21 +136,17 @@ w3_text <- function(
 
 #' @export
 #' @rdname inputs
-w3_textInput<- function(
-  inputId,
-  label,
-  placeholder = ""
-) {
+w3_textInput <- function(inputId,
+                         label,
+                         placeholder = "") {
   w3_text(inputId, label, placeholder, type = "text")
 }
 
 #' @export
 #' @rdname inputs
-w3_passwordInput<- function(
-  inputId,
-  label,
-  placeholder = ""
-) {
+w3_passwordInput <- function(inputId,
+                             label,
+                             placeholder = "") {
   w3_text(inputId, label, placeholder, type = "password")
 }
 
@@ -159,13 +154,11 @@ w3_passwordInput<- function(
 
 #' @export
 #' @rdname inputs
-w3_dateInput <- function(
-  inputId,
-  label,
-  value= Sys.Date(),
-  min = "",
-  max = ""
-){
+w3_dateInput <- function(inputId,
+                         label,
+                         value = Sys.Date(),
+                         min = "",
+                         max = "") {
   tagList(
     tags$label(
       `for` = inputId,
@@ -185,22 +178,18 @@ w3_dateInput <- function(
 
 #' @export
 #' @rdname inputs
-w3_editableListInput <- function(
-  inputId,
-  label,
-  choices,
-  ul_class = "",
-  li_class = ""
-){
-
-  if(is.null(names(choices))){
+w3_editableListInput <- function(inputId,
+                                 label,
+                                 choices,
+                                 ul_class = "",
+                                 li_class = "") {
+  if (is.null(names(choices))) {
     names(choices) <- choices
   }
 
-  lis <- mapply(function(x, y){
-
-    tags$li (
-      class=li_class,
+  lis <- mapply(function(x, y) {
+    tags$li(
+      class = li_class,
       name = y,
       tags$span(
         paste0(y, ":")
@@ -211,7 +200,6 @@ w3_editableListInput <- function(
         x
       )
     )
-
   }, x = choices, y = names(choices), SIMPLIFY = FALSE)
 
   tagList(
@@ -221,61 +209,54 @@ w3_editableListInput <- function(
     ),
     tags$ul(
       id = inputId,
-      class= paste("w3-ul w3-uleditable",ul_class),
+      class = paste("w3-ul w3-uleditable", ul_class),
       name = inputId,
       lis
     )
   )
-
 }
 
 #' @export
 #' @rdname inputs
-w3_numericInput<- function(
-  inputId,
-  label,
-  value = NULL,
-  min,
-  max,
-  step = NULL,
-  placeholder = ""
-) {
-
-    tagList(
-      tags$label(
-        label
-      ),
-      tags$input(
-        id = inputId,
-        class = "w3-input w3_numericInput w3-border",
-        type = "number",
-        value = value,
-        min = min,
-        max = max,
-        step = step
-      )
+w3_numericInput <- function(inputId,
+                            label,
+                            value = NULL,
+                            min,
+                            max,
+                            step = NULL,
+                            placeholder = "") {
+  tagList(
+    tags$label(
+      label
+    ),
+    tags$input(
+      id = inputId,
+      class = "w3-input w3_numericInput w3-border",
+      type = "number",
+      value = value,
+      min = min,
+      max = max,
+      step = step
     )
+  )
 }
 
 # FROM shiny codebase
 
-dropNulls <- function (x){
+dropNulls <- function(x) {
   x[!vapply(x, is.null, FUN.VALUE = logical(1))]
 }
 
 #' @export
 #' @rdname inputs
-w3_updateNumericInput <- function(
-  inputId,
-  label = NULL,
-  placeholder = NULL,
-  value = NULL,
-  min = NULL,
-  max = NULL,
-  step = NULL,
-  session = shiny::getDefaultReactiveDomain()
-
-){
+w3_updateNumericInput <- function(inputId,
+                                  label = NULL,
+                                  placeholder = NULL,
+                                  value = NULL,
+                                  min = NULL,
+                                  max = NULL,
+                                  step = NULL,
+                                  session = shiny::getDefaultReactiveDomain()) {
   message <- dropNulls(
     list(
       label = label,
@@ -291,12 +272,10 @@ w3_updateNumericInput <- function(
 
 #' @export
 #' @rdname inputs
-w3_checkbox <- function(
-  inputId,
-  label,
-  value = FALSE
-) {
-  if (!value){
+w3_checkbox <- function(inputId,
+                        label,
+                        value = FALSE) {
+  if (!value) {
     value <- NULL
   }
   tags$div(
@@ -312,23 +291,19 @@ w3_checkbox <- function(
       label
     )
   )
-
 }
 
 #' @export
 #' @rdname inputs
-w3_checkboxGroupInput <- function(
-  inputId,
-  label = NULL,
-  choices,
-  selected = NULL,
-  choiceNames = NULL
-) {
-
-  if (is.null(choiceNames)){
+w3_checkboxGroupInput <- function(inputId,
+                                  label = NULL,
+                                  choices,
+                                  selected = NULL,
+                                  choiceNames = NULL) {
+  if (is.null(choiceNames)) {
     choiceNames <- choices
   }
-  if (is.null(selected)){
+  if (is.null(selected)) {
     selected <- NA
   }
 
@@ -337,14 +312,13 @@ w3_checkboxGroupInput <- function(
     tags$div(
       id = inputId,
       class = "w3_checkboxGroup-parent",
-      mapply(function(choice, choiceName, selected){
-
+      mapply(function(choice, choiceName, selected) {
         tags$div(
           tags$input(
             class = "w3-check w3_checkboxGroupInput",
             type = "checkbox",
             checked = {
-              if (choice %in% selected){
+              if (choice %in% selected) {
                 "checked"
               } else {
                 NULL

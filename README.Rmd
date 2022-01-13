@@ -181,6 +181,7 @@ shinyApp(ui, server)
 ```
 
 ```{r}
+pkgload::load_all()
 library(shiny)
 ui <- function(request){
   w3_page(
@@ -195,6 +196,11 @@ ui <- function(request){
       min = 1, 
       max = 10, 
       step = 2
+    ), 
+    w3_selectInput(
+      "w3_selectInput", 
+      "Select", 
+      choices = letters
     )
   )
 }
@@ -213,7 +219,16 @@ server <- function(
       max = 55, 
       step = 3
     )
+    w3_updateSelectInput(
+      "w3_selectInput", 
+      "Select", 
+      choices = LETTERS
+    )
   }, ignoreInit = TRUE)
+  
+  observe({
+    print(input $ w3_selectInput)
+  })
   
 }
 
