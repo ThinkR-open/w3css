@@ -8,17 +8,21 @@
 #' @param button_class Additional class to add to the button
 #' @param content_style Additional style to add to the content tag
 #'
-#' @return
+#' @return An HTML div tag
 #' @export
 #'
 #' @examples
+#' w3_dropdown(
+#'   button_text = "Hover Over Me!",
+#'   content = "and I'll show you something cool",
+#' )
 #'
 w3_dropdown <- function(
   button_text = "Hover Over Me!",
   content = list(),
   button_class = NULL,
   content_style = NULL
-){
+    ) {
   tags$div(
     class = "w3-dropdown-hover",
     class = button_class,

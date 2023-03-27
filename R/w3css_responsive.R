@@ -13,7 +13,7 @@
 #'
 #' @examples
 #' w3_half("hey there")
-w3_half <- function(...){
+w3_half <- function(...) {
   tags$div(
     class = "w3-half",
     ...
@@ -22,7 +22,7 @@ w3_half <- function(...){
 
 #' @export
 #' @rdname responsive
-w3_third <- function(...){
+w3_third <- function(...) {
   tags$div(
     class = "w3-third",
     ...
@@ -31,7 +31,7 @@ w3_third <- function(...){
 
 #' @export
 #' @rdname responsive
-w3_twothird <- function(...){
+w3_twothird <- function(...) {
   tags$div(
     class = "w3-twothird",
     ...
@@ -40,7 +40,7 @@ w3_twothird <- function(...){
 
 #' @export
 #' @rdname responsive
-w3_quarter <- function(...){
+w3_quarter <- function(...) {
   tags$div(
     class = "w3-quarter",
     ...
@@ -49,7 +49,7 @@ w3_quarter <- function(...){
 
 #' @export
 #' @rdname responsive
-w3_threequarter <- function(...){
+w3_threequarter <- function(...) {
   tags$div(
     class = "w3-threequarter",
     ...
@@ -58,7 +58,7 @@ w3_threequarter <- function(...){
 
 #' @export
 #' @rdname responsive
-w3_rest <- function(...){
+w3_rest <- function(...) {
   tags$div(
     class = "w3-rest",
     ...
@@ -67,11 +67,9 @@ w3_rest <- function(...){
 
 #' @export
 #' @rdname responsive
-w3_col <- function(...){
+w3_col <- function(...) {
   tags$div(
     class = "w3-col",
     ...
   )
 }
-
-

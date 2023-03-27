@@ -5,10 +5,8 @@
 #' Implementation of W3.CSS Input, as described in
 #' [https://www.w3schools.com/w3css/w3css_input.asp](https://www.w3schools.com/w3css/w3css_input.asp)
 #'
-#' @inheritParams shiny::radioButtons
-#' @inheritParams shiny::textInput
-#' @inheritParams shiny::dateInput
 #' @param ul_class,li_class CSS class for the internal elements.
+#' @param choiceNames List of names and values, respectively, that are displayed to the user in the app and correspond to the each choice (for this reason, choiceNames and choiceValues must have the same length). If either of these arguments is provided, then the other must be provided and choices must not be provided. The advantage of using both of these over a named list for choices is that choiceNames allows any type of UI object to be passed through (tag objects, icons, HTML code, ...), instead of just simple text. See Examples.
 #'
 #' @return Input UI elements
 #'
@@ -16,6 +14,17 @@
 #' @rdname inputs
 #'
 #' @importFrom htmltools tagList tags
+#' @inheritParams shiny::radioButtons
+#' @inheritParams shiny::selectInput
+#' @inheritParams shiny::updateSelectInput
+#' @inheritParams shiny::textInput
+#' @inheritParams shiny::passwordInput
+#' @inheritParams shiny::dateInput
+#' @inheritParams shiny::numericInput
+#' @inheritParams shiny::updateNumericInput
+#' @inheritParams shiny::numericInput
+#' @inheritParams shiny::checkboxInput
+#' @inheritParams shiny::checkboxGroupInput
 #'
 #' @examples
 #'
@@ -23,11 +32,17 @@
 #'   "w3_actionButton",
 #'   "Show Modal"
 #' )
-w3_radioButton <- function(inputId,
-                           label,
-                           choices) {
-  if (is.null(names(choices))) {
-    names(choices) <- choices
+w3_radioButton <- function(
+  inputId,
+  label,
+  choices,
+  choiceNames = NULL
+    ) {
+
+  if (!is.null(choiceNames)) {
+    names(choices) <- choiceNames
+  } else if (is.null(names(choices))) {
+      names(choices) <- choices
   }
 
   them <- mapply(function(x, y) {
@@ -64,10 +79,12 @@ w3_radioButton <- function(inputId,
 #' @export
 #' @rdname inputs
 
-w3_selectInput <- function(inputId,
-                           label,
-                           choices,
-                           selected = NULL) {
+w3_selectInput <- function(
+  inputId,
+  label,
+  choices,
+  selected = NULL
+    ) {
   if (is.null(selected)) {
     selected <- choices[1]
   }
@@ -101,10 +118,12 @@ w3_selectInput <- function(inputId,
 
 #' @export
 #' @rdname inputs
-w3_updateSelectInput <- function(inputId,
-                                 label = NULL,
-                                 choices = NULL,
-                                 session = shiny::getDefaultReactiveDomain()) {
+w3_updateSelectInput <- function(
+  inputId,
+  label = NULL,
+  choices = NULL,
+  session = shiny::getDefaultReactiveDomain()
+    ) {
   message <- dropNulls(
     list(
       label = label,
@@ -115,10 +134,12 @@ w3_updateSelectInput <- function(inputId,
 }
 
 #' @importFrom htmltools tagList
-w3_text <- function(inputId,
-                    label,
-                    placeholder = "",
-                    type) {
+w3_text <- function(
+  inputId,
+  label,
+  placeholder = "",
+  type
+    ) {
   tagList(
     tagList(
       tags$label(
@@ -136,17 +157,21 @@ w3_text <- function(inputId,
 
 #' @export
 #' @rdname inputs
-w3_textInput <- function(inputId,
-                         label,
-                         placeholder = "") {
+w3_textInput <- function(
+  inputId,
+  label,
+  placeholder = ""
+    ) {
   w3_text(inputId, label, placeholder, type = "text")
 }
 
 #' @export
 #' @rdname inputs
-w3_passwordInput <- function(inputId,
-                             label,
-                             placeholder = "") {
+w3_passwordInput <- function(
+  inputId,
+  label,
+  placeholder = ""
+    ) {
   w3_text(inputId, label, placeholder, type = "password")
 }
 
@@ -154,11 +179,13 @@ w3_passwordInput <- function(inputId,
 
 #' @export
 #' @rdname inputs
-w3_dateInput <- function(inputId,
-                         label,
-                         value = Sys.Date(),
-                         min = "",
-                         max = "") {
+w3_dateInput <- function(
+  inputId,
+  label,
+  value = Sys.Date(),
+  min = "",
+  max = ""
+    ) {
   tagList(
     tags$label(
       `for` = inputId,
@@ -178,11 +205,13 @@ w3_dateInput <- function(inputId,
 
 #' @export
 #' @rdname inputs
-w3_editableListInput <- function(inputId,
-                                 label,
-                                 choices,
-                                 ul_class = "",
-                                 li_class = "") {
+w3_editableListInput <- function(
+  inputId,
+  label,
+  choices,
+  ul_class = "",
+  li_class = ""
+    ) {
   if (is.null(names(choices))) {
     names(choices) <- choices
   }
@@ -218,13 +247,15 @@ w3_editableListInput <- function(inputId,
 
 #' @export
 #' @rdname inputs
-w3_numericInput <- function(inputId,
-                            label,
-                            value = NULL,
-                            min,
-                            max,
-                            step = NULL,
-                            placeholder = "") {
+w3_numericInput <- function(
+  inputId,
+  label,
+  value = NULL,
+  min,
+  max,
+  step = NULL,
+  placeholder = ""
+    ) {
   tagList(
     tags$label(
       label
@@ -249,14 +280,16 @@ dropNulls <- function(x) {
 
 #' @export
 #' @rdname inputs
-w3_updateNumericInput <- function(inputId,
-                                  label = NULL,
-                                  placeholder = NULL,
-                                  value = NULL,
-                                  min = NULL,
-                                  max = NULL,
-                                  step = NULL,
-                                  session = shiny::getDefaultReactiveDomain()) {
+w3_updateNumericInput <- function(
+  inputId,
+  label = NULL,
+  placeholder = NULL,
+  value = NULL,
+  min = NULL,
+  max = NULL,
+  step = NULL,
+  session = shiny::getDefaultReactiveDomain()
+    ) {
   message <- dropNulls(
     list(
       label = label,
@@ -272,9 +305,11 @@ w3_updateNumericInput <- function(inputId,
 
 #' @export
 #' @rdname inputs
-w3_checkbox <- function(inputId,
-                        label,
-                        value = FALSE) {
+w3_checkbox <- function(
+  inputId,
+  label,
+  value = FALSE
+    ) {
   if (!value) {
     value <- NULL
   }
@@ -295,11 +330,13 @@ w3_checkbox <- function(inputId,
 
 #' @export
 #' @rdname inputs
-w3_checkboxGroupInput <- function(inputId,
-                                  label = NULL,
-                                  choices,
-                                  selected = NULL,
-                                  choiceNames = NULL) {
+w3_checkboxGroupInput <- function(
+  inputId,
+  label = NULL,
+  choices,
+  selected = NULL,
+  choiceNames = NULL
+    ) {
   if (is.null(choiceNames)) {
     choiceNames <- choices
   }

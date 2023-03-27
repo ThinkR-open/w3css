@@ -8,7 +8,6 @@
 #'
 #' @examples
 #' w3_badge()
-
-w3_badge <- function(){
+w3_badge <- function() {
   w3_prefix("badge")
 }

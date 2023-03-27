@@ -16,8 +16,8 @@
 #' w3_panel("hey there")
 #' # Container with a 'teal'-colored background
 #' w3_panel("hey there", class = w3_color("teal"))
-w3_panel <- function(..., with_close = FALSE){
-  if (with_close){
+w3_panel <- function(..., with_close = FALSE) {
+  if (with_close) {
     tags$div(
       class = w3_prefix("panel"),
       ...
@@ -26,12 +26,11 @@ w3_panel <- function(..., with_close = FALSE){
     tags$div(
       class = w3_prefix("panel"),
       tags$span(
-        onclick="this.parentElement.style.display='none'",
-        class= "w3-button w3-display-topright",
+        onclick = "this.parentElement.style.display='none'",
+        class = "w3-button w3-display-topright",
         "X"
       ),
       ...
     )
   }
-
 }

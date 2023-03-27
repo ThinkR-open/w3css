@@ -9,7 +9,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%", 
+  out.width = "100%",
   eval = FALSE
 )
 ```
@@ -17,9 +17,11 @@ knitr::opts_chunk$set(
 # w3css
 
 <!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![R-CMD-check](https://github.com/thinkr-open/w3css/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/thinkr-open/w3css/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-[WORK IN PROGRESS] There are still a lot of elements/features to implement. 
+[WORK IN PROGRESS] There are still a lot of elements/features to implement.
 
 An implementation of W3 CSS <https://www.w3schools.com/w3css/> for 'shiny'.
 
@@ -28,9 +30,34 @@ An implementation of W3 CSS <https://www.w3schools.com/w3css/> for 'shiny'.
 ``` r
 remotes::install_github("thinkr-open/w3css")
 ```
+
+## About
+
+You're reading the doc about version : `r pkgload::pkg_version()`
+
+This README has been compiled on the
+
+```{r eval = TRUE}
+Sys.time()
+```
+
+Here are the test & coverage results :
+
+```{r eval = TRUE}
+devtools::check(quiet = TRUE)
+```
+
+```{r echo = FALSE, eval = TRUE}
+unloadNamespace("w3css")
+```
+
+```{r eval = TRUE}
+covr::package_coverage()
+```
+
 ## Note about W3.CSS approach
 
-W3.CSS philosophy is to allow a lot of flexibily in your UI design by setting CSS class to your component. 
+W3.CSS philosophy is to allow a lot of flexibily in your UI design by setting CSS class to your component.
 For example, to create a container with a padding and centered, you'd do:
 
 ```html
@@ -44,7 +71,7 @@ Which will be translated here with:
 ```{r}
 w3_container(
   class = w3_center(),
-  class = w3_padding(24), 
+  class = w3_padding(24),
   htmltools::tags$p(
     "My content"
   )
@@ -56,80 +83,79 @@ w3_container(
 ```{r}
 library(w3css)
 library(shiny)
-ui <- function(){
+ui <- function() {
   w3_page(
     w3_container(
       w3_panel(
         w3_actionButton(
-          "w3_actionButton", 
+          "w3_actionButton",
           "Show Modal"
         )
       ),
       w3_panel(
         w3_modal(
-          "w3_modal", 
-          "Here is a modal", 
-          "Its body", 
-          "Its footer", 
+          "w3_modal",
+          "Here is a modal",
+          "Its body",
+          "Its footer",
           "teal"
-        ) 
-      )
-      ,
+        )
+      ),
       w3_panel(
         w3_numericInput(
-          "w3_numericInput", 
-          "Enter number", 
-          value = 5, 
-          min = 1, 
-          max = 10, 
+          "w3_numericInput",
+          "Enter number",
+          value = 5,
+          min = 1,
+          max = 10,
           step = 2
         ),
         w3_checkbox(
-          "w3_checkbox", 
+          "w3_checkbox",
           "Click me"
         ),
         w3_checkboxGroupInput(
-          "w3_checkboxGroupInput", 
-          "Checkbox group", 
+          "w3_checkboxGroupInput",
+          "Checkbox group",
           choices = letters[1:4]
         )
       ),
       w3_panel(
         w3_radioButton(
-          "w3_radioButton", 
-          label = "Hey there", 
+          "w3_radioButton",
+          label = "Hey there",
           choices = letters[1:3]
         )
-      ), 
+      ),
       w3_panel(
         w3_selectInput(
-          "w3_selectInput", 
-          label = "Hey there", 
+          "w3_selectInput",
+          label = "Hey there",
           choices = letters[1:3]
         )
-      ), 
+      ),
       w3_panel(
         w3_textInput(
-          "w3_textInput", 
+          "w3_textInput",
           "Text"
         )
-      ), 
+      ),
       w3_panel(
         w3_passwordInput(
-          "w3_passwordInput", 
+          "w3_passwordInput",
           "password"
         )
-      ), 
-      w3_panel( 
+      ),
+      w3_panel(
         w3_dateInput(
-          "w3_dateInput", 
+          "w3_dateInput",
           "Pick a date"
         )
-      ), 
-      w3_panel( 
+      ),
+      w3_panel(
         w3_editableListInput(
-          "w3_editableListInput", 
-          "Editable list", 
+          "w3_editableListInput",
+          "Editable list",
           choices = names(mtcars)
         )
       )
@@ -138,43 +164,42 @@ ui <- function(){
 }
 
 server <- function(
-  input, 
-  output, 
+  input,
+  output,
   session
-){
-  observeEvent( input$w3_actionButton , {
+    ) {
+  observeEvent(input$w3_actionButton, {
     print(input$w3_actionButton)
     req(input$w3_actionButton > 0)
     w3_show_modal("w3_modal")
   })
-  observeEvent( input$w3_numericInput , {
+  observeEvent(input$w3_numericInput, {
     print(input$w3_numericInput)
   })
-  observeEvent( input$w3_checkbox , {
+  observeEvent(input$w3_checkbox, {
     print(input$w3_checkbox)
   })
-  observeEvent( input$w3_checkboxGroupInput , {
+  observeEvent(input$w3_checkboxGroupInput, {
     print(input$w3_checkboxGroupInput)
   })
-  observeEvent( input$w3_radioButton , {
+  observeEvent(input$w3_radioButton, {
     print(input$w3_radioButton)
   })
-  observeEvent( input$w3_selectInput , {
+  observeEvent(input$w3_selectInput, {
     print(input$w3_selectInput)
   })
-  observeEvent( input$w3_textInput , {
+  observeEvent(input$w3_textInput, {
     print(input$w3_textInput)
   })
-  observeEvent( input$w3_passwordInput , {
+  observeEvent(input$w3_passwordInput, {
     print(input$w3_passwordInput)
   })
-  observeEvent( input$w3_dateInput , {
+  observeEvent(input$w3_dateInput, {
     print(input$w3_dateInput)
   })
-  observeEvent( input$w3_editableListInput , {
+  observeEvent(input$w3_editableListInput, {
     print(input$w3_editableListInput)
   })
-  
 }
 
 shinyApp(ui, server)
@@ -183,53 +208,56 @@ shinyApp(ui, server)
 ```{r}
 pkgload::load_all()
 library(shiny)
-ui <- function(request){
+ui <- function(request) {
   w3_page(
     w3_actionButton(
-      "w3_actionButton", 
+      "w3_actionButton",
       "Update"
     ),
     w3_numericInput(
-      "w3_numericInput", 
-      "Enter number", 
-      value = 5, 
-      min = 1, 
-      max = 10, 
+      "w3_numericInput",
+      "Enter number",
+      value = 5,
+      min = 1,
+      max = 10,
       step = 2
-    ), 
+    ),
     w3_selectInput(
-      "w3_selectInput", 
-      "Select", 
+      "w3_selectInput",
+      "Select",
       choices = letters
     )
   )
 }
 
 server <- function(
-  input, 
-  output, 
+  input,
+  output,
   session
-){
-  observeEvent( input$w3_actionButton , {
-    w3_updateNumericInput(
-      "w3_numericInput",
-      "Enter number", 
-      value = 15, 
-      min = 5, 
-      max = 55, 
-      step = 3
-    )
-    w3_updateSelectInput(
-      "w3_selectInput", 
-      "Select", 
-      choices = LETTERS
-    )
-  }, ignoreInit = TRUE)
-  
+    ) {
+  observeEvent(
+    input$w3_actionButton,
+    {
+      w3_updateNumericInput(
+        "w3_numericInput",
+        "Enter number",
+        value = 15,
+        min = 5,
+        max = 55,
+        step = 3
+      )
+      w3_updateSelectInput(
+        "w3_selectInput",
+        "Select",
+        choices = LETTERS
+      )
+    },
+    ignoreInit = TRUE
+  )
+
   observe({
-    print(input $ w3_selectInput)
+    print(input$ w3_selectInput)
   })
-  
 }
 
 shinyApp(ui, server)

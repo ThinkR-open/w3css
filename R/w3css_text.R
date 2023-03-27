@@ -9,30 +9,30 @@
 #'
 #' @examples
 #' w3_left_align()
-w3_left_align <- function(){
+w3_left_align <- function() {
   w3_prefix("left-align")
 }
 
 #' @export
 #' @rdname text
-w3_right_align <- function(){
+w3_right_align <- function() {
   w3_prefix("right-align")
 }
 
 #' @export
 #' @rdname text
-w3_center <- function(){
+w3_center <- function() {
   w3_prefix("center")
 }
 
 #' @export
 #' @rdname text
-w3_wide <- function(){
+w3_wide <- function() {
   w3_prefix("wide")
 }
 
 #' @export
 #' @rdname text
-w3_opacity <- function(){
+w3_opacity <- function() {
   w3_prefix("opacity")
 }

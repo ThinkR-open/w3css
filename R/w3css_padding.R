@@ -21,11 +21,10 @@ w3_padding <- function(
     64,
     "small",
     "large"
-  )
-){
+  )) {
   value <- as.character(value)
   value <- match.arg(value)
-  if (value == ""){
+  if (value == "") {
     return(
       w3_prefix("padding")
     )

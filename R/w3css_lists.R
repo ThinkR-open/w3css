@@ -17,13 +17,11 @@
 w3_list <- function(
   ...,
   ul_class = ""
-){
+    ) {
   tagList(
     tags$ul(
-      class= paste("w3-ul",ul_class),
+      class = paste("w3-ul", ul_class),
       ...
     )
   )
 }
-
-

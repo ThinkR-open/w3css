@@ -11,7 +11,7 @@
 #' @importFrom htmltools tagList tags
 #'
 #' @examples
-#' w3_actionButton('ok', 'Go')
+#' w3_actionButton("ok", "Go")
 #'
 w3_actionButton <- function(
   inputId,
@@ -19,7 +19,7 @@ w3_actionButton <- function(
   type = c("btn", "button", "bar", "block", "circle", "ripple"),
   # disabled= NULL, TODO => Check from getValue
   ...
-){
+    ) {
   type <- match.arg(type)
   tagList(
     tags$button(
@@ -32,4 +32,3 @@ w3_actionButton <- function(
     )
   )
 }
-

@@ -24,7 +24,7 @@ w3_modal <- function(
   footer = "",
   color = "",
   display = "none"
-){
+    ) {
   htmlTemplate(
     system.file("htmltemplates/modal.html", package = "w3css"),
     id = inputId,
@@ -38,12 +38,12 @@ w3_modal <- function(
 
 #' @rdname modals
 #' @export
-w3_show_modal <- function(inputId, session = shiny::getDefaultReactiveDomain()){
+w3_show_modal <- function(inputId, session = shiny::getDefaultReactiveDomain()) {
   session$sendCustomMessage("show_modal", inputId)
 }
 
 #' @rdname modals
 #' @export
-w3_hide_modal <- function(inputId, session = shiny::getDefaultReactiveDomain()){
+w3_hide_modal <- function(inputId, session = shiny::getDefaultReactiveDomain()) {
   session$sendCustomMessage("hide_modal", inputId)
 }

@@ -29,7 +29,7 @@ w3_hide_modal(inputId, session = shiny::getDefaultReactiveDomain())
 \item{display}{Display style of the modal (either 'none' or 'block')}
 
 \item{session}{The \code{session} object passed to function given to
-\code{shinyServer}.}
+\code{shinyServer}. Default is \code{getDefaultReactiveDomain()}.}
 }
 \value{
 a modal UI, or used for side effects.

@@ -21,12 +21,16 @@ w3_dropdown(
 \item{content_style}{Additional style to add to the content tag}
 }
 \value{
-
+An HTML div tag
 }
 \description{
 Implementation of W3.CSS Dropdowns, as described in
 \url{https://www.w3schools.com/w3css/w3css_dropdowns.asp}
 }
 \examples{
+w3_dropdown(
+  button_text = "Hover Over Me!",
+  content = "and I'll show you something cool",
+)
 
 }

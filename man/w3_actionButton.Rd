@@ -29,6 +29,6 @@ Implementation of W3.CSS Buttons, as described in
 \url{https://www.w3schools.com/w3css/w3css_buttons.asp}
 }
 \examples{
-w3_actionButton('ok', 'Go')
+w3_actionButton("ok", "Go")
 
 }
