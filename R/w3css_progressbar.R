@@ -1,7 +1,11 @@
 #' W3.CSS Progress Bars
 #'
 #' Implementation of W3.CSS Progress Bars, as described in
-#' [https://www.w3schools.com/w3css/w3css_progressbar.asp](https://www.w3schools.com/w3css/w3css_progressbar.asp)
+#' [https://www.w3schools.com/w3css/w3css_progressbar.asp](https://www.w3schools.com/w3css/w3css_progressbar.asp).
+#'
+#' The outer wrapper carries the WAI-ARIA `role="progressbar"` and the
+#' `aria-valuenow / aria-valuemin / aria-valuemax` attributes so screen
+#' readers announce the progress correctly.
 #'
 #' @param value numeric(1) in `[0, 100]`, current progress value.
 #' @param color W3 color name applied to the inner bar (default `"green"`).
@@ -23,5 +27,12 @@ w3_progressbar <- function(value, color = "green", show_label = FALSE) {
     style = sprintf("width:%s%%", value),
     if (show_label) sprintf("%s%%", value) else NULL
   )
-  tags$div(class = "w3-light-grey", inner)
+  tags$div(
+    class = "w3-light-grey",
+    role = "progressbar",
+    `aria-valuenow` = as.character(value),
+    `aria-valuemin` = "0",
+    `aria-valuemax` = "100",
+    inner
+  )
 }

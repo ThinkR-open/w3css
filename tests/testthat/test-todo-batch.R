@@ -72,6 +72,21 @@ test_that("w3_progressbar renders a width-styled inner div (#19)", {
   expect_true(grepl("width:42%", str, fixed = TRUE))
 })
 
+test_that("w3_progressbar exposes ARIA attributes for screen readers (#19)", {
+  str <- as.character(w3_progressbar(42))
+  expect_true(grepl("role=\"progressbar\"", str, fixed = TRUE))
+  expect_true(grepl("aria-valuenow=\"42\"", str, fixed = TRUE))
+  expect_true(grepl("aria-valuemin=\"0\"", str, fixed = TRUE))
+  expect_true(grepl("aria-valuemax=\"100\"", str, fixed = TRUE))
+})
+
+test_that("w3_alert accepts the full W3 palette (#2)", {
+  # Anything w3_color() accepts must work; level is no longer restricted.
+  out <- w3_alert("Heads up!", level = "teal")
+  expect_true(grepl("w3-teal", as.character(out), fixed = TRUE))
+  expect_error(w3_alert("nope", level = "definitely-not-a-color"))
+})
+
 test_that("w3_progressbar clamps values outside [0, 100]", {
   expect_true(grepl("width:100%", as.character(w3_progressbar(150)), fixed = TRUE))
   expect_true(grepl("width:0%",  as.character(w3_progressbar(-5)),  fixed = TRUE))

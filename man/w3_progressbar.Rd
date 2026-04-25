@@ -18,7 +18,12 @@ an htmltools tag.
 }
 \description{
 Implementation of W3.CSS Progress Bars, as described in
-\url{https://www.w3schools.com/w3css/w3css_progressbar.asp}
+\url{https://www.w3schools.com/w3css/w3css_progressbar.asp}.
+}
+\details{
+The outer wrapper carries the WAI-ARIA \code{role="progressbar"} and the
+\code{aria-valuenow / aria-valuemin / aria-valuemax} attributes so screen
+readers announce the progress correctly.
 }
 \examples{
 w3_progressbar(25)

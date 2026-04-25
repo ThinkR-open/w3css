@@ -4,13 +4,15 @@
 \alias{w3_alert}
 \title{W3.CSS Alerts}
 \usage{
-w3_alert(..., level = c("red", "yellow", "green", "blue"))
+w3_alert(..., level = "red")
 }
 \arguments{
 \item{...}{alert content.}
 
-\item{level}{one of \code{"red"}, \code{"yellow"}, \code{"green"}, \code{"blue"} — controls
-the background color class. Defaults to \code{"red"}.}
+\item{level}{any W3 color name accepted by \code{\link[=w3_color]{w3_color()}} (e.g.
+\code{"red"}, \code{"yellow"}, \code{"teal"}, \code{"deep-orange"}). Controls the
+background color class. Defaults to \code{"red"}. Validation is delegated
+to \code{\link[=w3_color]{w3_color()}} so the full W3 palette is accepted.}
 }
 \value{
 an htmltools tag.
@@ -22,4 +24,5 @@ Implementation of W3.CSS Alerts, as described in
 \examples{
 w3_alert("Danger!")
 w3_alert("Heads up!", level = "yellow")
+w3_alert("Looks good!", level = "teal")
 }
